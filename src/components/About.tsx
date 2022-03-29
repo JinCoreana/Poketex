@@ -1,22 +1,22 @@
 import React from 'react';
 import styled from "@emotion/styled/macro";
-import { Ability, Color, Type } from '../Types';
+import { Ability, Color, Type } from '../types';
 import { mapColorToHex, mapTypeToHex } from '../utils';
 import Abilities from './Abilities';
 
 type Props = {
-    isLoading: boolean;
-    color?: Color;
-    growthRate?: string;
-    flavorText?: string;
-    genderRate?: number;
-    isLegendary?: boolean;
-    isMythical?: boolean;
-    types?: Array<Type>;
-    weight?: number;
-    height?: number;
-    baseExp?: number;
-    abilities?: Array<Ability>;
+  isLoading: boolean;
+  color?: Color;
+  growthRate?: string;
+  flavorText?: string;
+  genderRate?: number;
+  isLegendary?: boolean;
+  isMythical?: boolean;
+  types?: Array<Type>;
+  weight?: number;
+  height?: number;
+  baseExp?: number;
+  abilities?: Array<Ability>;
 }
 
 const Base = styled.article`
@@ -108,76 +108,76 @@ const InfoItemValue = styled.span<{ color: string }>`
 `;
 
 const About: React.FC<Props> = ({
-    isLoading,
-    isMythical,
-    isLegendary,
-    types,
-    weight,
-    flavorText,
-    growthRate,
-    genderRate,
-    color,
-    height,
-    baseExp,
-    abilities,
+  isLoading,
+  isMythical,
+  isLegendary,
+  types,
+  weight,
+  flavorText,
+  growthRate,
+  genderRate,
+  color,
+  height,
+  baseExp,
+  abilities,
 }) => {
-    const rarity = isLegendary ? 'Legendary' : isMythical ? 'Mythical' : 'Normal';
+  const rarity = isLegendary ? 'Legendary' : isMythical ? 'Mythical' : 'Normal';
 
-    return (
-        <Base>
-            <FlavorText>{flavorText}</FlavorText>
-            {
-                isLoading ? (
-                    <ImageWrapper>
-                        <Image src="/loading.gif" />
-                    </ImageWrapper>
-                ) : (
-                    <>
-                        <TypeList>
-                            {
-                                types?.map(({ type }, idx) => (
-                                    <TypeWrapper key={idx} color={mapTypeToHex(type.name)}>
-                                        <TypeImage src={`/assets/${type.name}.svg`} />
-                                        <TypeLabel>{type.name.toUpperCase()}</TypeLabel>
-                                    </TypeWrapper>
-                                ))
-                            }
-                        </TypeList>
-                        <InfoContainerWrapper>
-                            <Title color={mapColorToHex(color?.name)}>Pokédex Data</Title>
-                            <InfoContainer>
-                                <InfoItem>
-                                    <InfoItemLabel>Height</InfoItemLabel>
-                                    {height && <InfoItemValue color={mapColorToHex(color?.name)}>{height / 10}m</InfoItemValue>}
-                                </InfoItem>
-                                <InfoItem>
-                                    <InfoItemLabel>Weight</InfoItemLabel>
-                                    {weight && <InfoItemValue color={mapColorToHex(color?.name)}>{weight / 10}kg</InfoItemValue>}
-                                </InfoItem>
-                                <InfoItem>
-                                    <InfoItemLabel>Gender</InfoItemLabel>
-                                    {genderRate && <InfoItemValue color={mapColorToHex(color?.name)}>{genderRate === -1 ? 'Unknown' : 'Male / Female'}</InfoItemValue>}
-                                </InfoItem>
-                                <InfoItem>
-                                    <InfoItemLabel>Growth Rate</InfoItemLabel>
-                                    {growthRate && <InfoItemValue color={mapColorToHex(color?.name)}>{growthRate}</InfoItemValue>}
-                                </InfoItem>
-                                <InfoItem>
-                                    <InfoItemLabel>Base Exp</InfoItemLabel>
-                                    {baseExp && <InfoItemValue color={mapColorToHex(color?.name)}>{baseExp}</InfoItemValue>}
-                                </InfoItem>
-                                <InfoItem>
-                                    <InfoItemLabel>Rarity</InfoItemLabel>
-                                    {rarity && <InfoItemValue color={mapColorToHex(color?.name)}>{rarity}</InfoItemValue>}
-                                </InfoItem>
-                            </InfoContainer>
-                        </InfoContainerWrapper>
-                        {abilities && <Abilities abilities={abilities} />}
-                    </>
-                )
-            }
-        </Base>
-    )
+  return (
+    <Base>
+      <FlavorText>{flavorText}</FlavorText>
+      {
+        isLoading ? (
+          <ImageWrapper>
+            <Image src="/loading.gif" />
+          </ImageWrapper>
+        ) : (
+          <>
+            <TypeList>
+              {
+                types?.map(({ type }, idx) => (
+                  <TypeWrapper key={idx} color={mapTypeToHex(type.name)}>
+                    <TypeImage src={`/assets/${type.name}.svg`} />
+                    <TypeLabel>{type.name.toUpperCase()}</TypeLabel>
+                  </TypeWrapper>
+                ))
+              }
+            </TypeList>
+            <InfoContainerWrapper>
+              <Title color={mapColorToHex(color?.name)}>Pokédex Data</Title>
+              <InfoContainer>
+                <InfoItem>
+                  <InfoItemLabel>Height</InfoItemLabel>
+                  {height && <InfoItemValue color={mapColorToHex(color?.name)}>{height / 10}m</InfoItemValue>}
+                </InfoItem>
+                <InfoItem>
+                  <InfoItemLabel>Weight</InfoItemLabel>
+                  {weight && <InfoItemValue color={mapColorToHex(color?.name)}>{weight / 10}kg</InfoItemValue>}
+                </InfoItem>
+                <InfoItem>
+                  <InfoItemLabel>Gender</InfoItemLabel>
+                  {genderRate && <InfoItemValue color={mapColorToHex(color?.name)}>{genderRate === -1 ? 'Unknown' : 'Male / Female'}</InfoItemValue>}
+                </InfoItem>
+                <InfoItem>
+                  <InfoItemLabel>Growth Rate</InfoItemLabel>
+                  {growthRate && <InfoItemValue color={mapColorToHex(color?.name)}>{growthRate}</InfoItemValue>}
+                </InfoItem>
+                <InfoItem>
+                  <InfoItemLabel>Base Exp</InfoItemLabel>
+                  {baseExp && <InfoItemValue color={mapColorToHex(color?.name)}>{baseExp}</InfoItemValue>}
+                </InfoItem>
+                <InfoItem>
+                  <InfoItemLabel>Rarity</InfoItemLabel>
+                  {rarity && <InfoItemValue color={mapColorToHex(color?.name)}>{rarity}</InfoItemValue>}
+                </InfoItem>
+              </InfoContainer>
+            </InfoContainerWrapper>
+            {abilities && <Abilities abilities={abilities} />}
+          </>
+        )
+      }
+    </Base>
+  )
 }
 
 export default React.memo(About);

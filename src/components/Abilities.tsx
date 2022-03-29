@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled/macro';
-import { Ability, Color, EffectEntry } from '../Types';
+import { Ability, Color, EffectEntry } from '../types';
 import { mapColorToHex } from '../utils';
+import useAbilities from '../hooks/useAbilities';
 
 interface Props {
-    color?: Color;
-    abilities: Array<Ability>
+  color?: Color;
+  abilities: Array<Ability>
 }
 
 const Title = styled.h4<{ color: string }>`
@@ -50,18 +51,24 @@ const Description = styled.span`
 `;
 
 const Abilities: React.FC<Props> = ({
-    color, abilities }) => {
-    return (
-        <Base>
-            <Title color={mapColorToHex(color?.name)}>Abilities</Title>
-            <List>
-                <ListItem>
-                    <Label>Label</Label>
-                    <Description>Description</Description>
-                </ListItem>
-            </List>
-        </Base>
-    )
+  color, abilities }) => {
+  const results = useAbilities(abilities)
+
+
+  return (
+    <Base>
+      <Title color={mapColorToHex(color?.name)}>Abilities</Title>
+      <List>
+        {
+          results.map(({ data }, idx) =>
+            data && <ListItem key={idx}>
+              <Label>{data.data.name}</Label>
+              <Description>{data.data.effect_entries[0].effect}</Description>
+            </ListItem>)
+        }
+      </List>
+    </Base>
+  )
 }
 
 export default Abilities;

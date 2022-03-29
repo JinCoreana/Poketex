@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled/macro';
 
-import { Color, Stat } from '../Types';
+import { Color, Stat } from '../types';
 import { mapColorToHex } from '../utils';
 
 type Props = {
-    isLoading: boolean;
-    stats?: Array<Stat>;
-    color?: Color;
+  isLoading: boolean;
+  stats?: Array<Stat>;
+  color?: Color;
 }
 
 const Base = styled.div`
@@ -65,22 +65,22 @@ const Gauge = styled.div<{ percentage: number; color: string; }>`
 `;
 
 const Stats: React.FC<Props> = ({ stats, color }) => (
-    <Base>
-        <Title color={mapColorToHex(color?.name)}>Base Stats</Title>
-        <List>
-            {
-                stats?.map(({ stat, base_stat }, idx) => (
-                    <ListItem key={idx}>
-                        <Name>{stat.name === 'hp' ? stat.name.toUpperCase() : stat.name}</Name>
-                        <Amount>{base_stat}</Amount>
-                        <GaugeWrapper>
-                            <Gauge percentage={(base_stat / 255) * 100} color={mapColorToHex(color?.name)} />
-                        </GaugeWrapper>
-                    </ListItem>
-                ))
-            }
-        </List>
-    </Base>
+  <Base>
+    <Title color={mapColorToHex(color?.name)}>Base Stats</Title>
+    <List>
+      {
+        stats?.map(({ stat, base_stat }, idx) => (
+          <ListItem key={idx}>
+            <Name>{stat.name === 'hp' ? stat.name.toUpperCase() : stat.name}</Name>
+            <Amount>{base_stat}</Amount>
+            <GaugeWrapper>
+              <Gauge percentage={(base_stat / 255) * 100} color={mapColorToHex(color?.name)} />
+            </GaugeWrapper>
+          </ListItem>
+        ))
+      }
+    </List>
+  </Base>
 )
 
 export default Stats;

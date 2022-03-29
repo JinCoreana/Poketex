@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled/macro';
-import { Chain, Color } from '../Types';
+import { Chain, Color } from '../types';
 import EvolutionStage from './EvolutionStage';
 import { mapColorToHex } from '../utils';
+import useEvolutionChain from '../hooks/useEvolutionChain';
 
 
 const Base = styled.div`
@@ -60,6 +61,7 @@ type Props = {
     url?: string;
 }
 const Evolution: React.FC<Props> = ({ url, color }) => {
+    const { isSuccess, isError, isLoading, data } = useEvolutionChain(url)
     const [evolutionChain, setEvolutionChain] = useState<Array<{ from: { name: string; url: string }, to: { name: string; url: string }, level: number }>>([]);
 
     useEffect(() => {

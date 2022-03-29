@@ -1,8 +1,13 @@
 import React from 'react'
 import styled from '@emotion/styled/macro'
-import { Color, Type } from '../Types';
-import { mapColorToHex, mapTypeToHex } from '../utils';
-
+import { Color, Type } from '../types';
+import { mapColorToHex, mapTypeToHex, } from '../utils';
+type Props = {
+    id: string;
+    name?: string;
+    types?: Array<Type>;
+    color?: Color;
+}
 const Base = styled.div<{ color?: string }>`
 display:flex;
 flex-direction: column;
@@ -37,7 +42,7 @@ font-size: 36px;
 font-weight: bold;
 opacity: 0.75;`;
 
-const TypeWrapper = styled.div<{ color?: string }>`
+const TypeWrapper = styled.div<{ color: string }>`
 background-color: ${({ color }) => color};
 padding: 4px;
 border-radius: 50%;
@@ -51,8 +56,9 @@ margin-top: 8px;
 ${TypeWrapper} +${TypeWrapper} {
     margin-left: 8px;
 };`;
-const TypeInfo = styled.div< { src: string } >`
-height: 12px;
+
+const TypeInfo = styled.img`
+  height: 12px;
 `;
 const ImageWrapper = styled.div`
 position: absolute;
@@ -62,17 +68,9 @@ left: -94px;
 opacity: 0.75;
 `;
 const Image = styled.img`
-width: 100%;
+
 height: 100%;
 object-fit: contain;`;
-
-interface Props {
-    id: string;
-    name?: string;
-    types: Array<Type>;
-    color?: Color;
-    src: () => void
-}
 
 const formatNumbering = (index: string): string => {
     return `#${index.padStart(3, '0')}`

@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled/macro';
 
-import { Color } from '../Types';
+import { Color } from '../types';
 import { mapColorToHex } from '../utils';
+import { usePokemonQueries } from '../hooks/usePokemon';
 
 
 const DividerWrapper = styled.div`
@@ -29,8 +30,8 @@ const ImageWrapper = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 100%;
+width: 100%;
+height: 100%;
   object-fit: contain;
 `;
 
@@ -43,30 +44,33 @@ const Base = styled.li`
 
 
 interface Props {
-    level: number;
-    color?: Color;
-    from: {
-        name: string;
-        url: string;
-    }
-    to: {
-        name: string;
-        url: string;
-    }
+  level: number;
+  color?: Color;
+  from: {
+    name: string;
+    url: string;
+  }
+  to: {
+    name: string;
+    url: string;
+  }
 }
-const EvolutionStage: React.FC<Props> = ({ level, color }) => (
-    <Base>
-        <ImageWrapper>
-            <Image src={''} />
-        </ImageWrapper>
-        <DividerWrapper>
-            {level && <Text color={mapColorToHex(color?.name)}>{`Level ${level}`}</Text>}
-            <Divider />
-        </DividerWrapper>
-        <ImageWrapper>
-            <Image src={''} />
-        </ImageWrapper>
-    </Base>
-);
+const EvolutionStage: React.FC<Props> = ({ level, color, from, to }) => {
+  const [prev, next] = usePokemonQueries([from.name, to.name])
+  return (
 
+    <Base>
+      <ImageWrapper>
+        <Image src={prev.data?.data.sprites.other['official-artwork'].front_default} />
+      </ImageWrapper>
+      <DividerWrapper>
+        {level && <Text color={mapColorToHex(color?.name)}>{`Level ${level}`}</Text>}
+        <Divider />
+      </DividerWrapper>
+      <ImageWrapper>
+        <Image src={next.data?.data.sprites.other['official-artwork'].front_default} />
+      </ImageWrapper>
+    </Base>
+  );
+}
 export default EvolutionStage;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled/macro'
 import usePokemon from '../hooks/usePokemon';
-import { ListResponse } from '../Types';
+import { ListResponse } from '../types';
 
 const Base = styled.div`
 margin-top: 24px;

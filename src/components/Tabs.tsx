@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled/macro'
-import { Color } from '../Types';
+import { Color } from '../types';
 import { mapColorToHex } from '../utils';
 
 const List = styled.ul`
@@ -12,16 +12,17 @@ const ListItem = styled.li`
 & + &{
     margin-left: 16px;
 }`;
-const TabButton = styled.button<{ active?: boolean; color: string }>`
-    margin: 0;
-    border-radius: 8px;
-    box-shadow: 6px 4px 14px 5ox rgba(0,0,0,0.21);
-    padding: 6px 12px;
-    background-color: #fff;
-    border:  none;
-    font-size: 16px;
-    color: ${({ active, color }) => active ? color : '#6B7280'};
-`
+const TabButton = styled.button<{ active?: boolean; color: string; }>`
+margin: 0;
+border-radius: 8px;
+box-shadow: 6px 4px 14px 5px rgba(0,0,0,0.21);
+padding: 6px 12px;
+background-color: #fff;
+border: none;
+font-size: 16px;
+color: ${({ active, color }) => active ? color : '#6B7280'};
+`;
+
 
 interface Props {
     tab: 'about' | 'stats' | 'evolution';
