@@ -27,6 +27,7 @@ object-fit: contain;`;
 
 const InfoWrapper = styled.div`
 display: flex;
+margin-top: 15px;
 justify-content: space-between;
 width: 100%;`;
 

@@ -38,7 +38,7 @@ padding: 0;
 right: 16px;
 font-size: 24px;
 font-weight:bold;
-color: #D105DB;`;
+color: #7a7a7a;`;
 
 const LoadingWrapper = styled.div`
 display:flex;

@@ -7,6 +7,7 @@ padding: 12px 18px;
 overflow: hidden; `
 const Title = styled.h1`
 margin: 0;
+margin-top: 15px;
 padding: 0;
 color: #d34f49;
 font-weight: bold;`
@@ -33,7 +34,7 @@ const IndexPage: React.FC = () => {
     return (
         <Base>
             <Title>Poketex</Title>
-            <Description>Place holder</Description>
+            <Description>Find your Pokemon!</Description>
             <PokemonList />
             <ImageWrapper>
                 <Image src="assets/pocketball.svg" />
